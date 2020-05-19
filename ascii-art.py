@@ -115,19 +115,24 @@ def main():
         if not COLOR_PRINT:
             print(totalString)
         else:
-            init(convert=True)  # initialize colorama
-            if COLOR_PRINT is GREEN:
-                print(Fore.GREEN + totalString)
-            elif COLOR_PRINT is RED:
-                print(Fore.RED + totalString)
-            elif COLOR_PRINT is BLUE:
-                print(Fore.BLUE + totalString)
-            elif COLOR_PRINT is YELLOW:
-                print(Fore.YELLOW + totalString)
-            elif COLOR_PRINT is CYAN:
-                print(Fore.CYAN + totalString)
-            elif COLOR_PRINT is MAGENTA:
-                print(Fore.MAGENTA + totalString)
+            color_print(totalString)
+
+
+# helper function to print in color
+def color_print(totalString):
+    init(convert=True)  # initialize colorama
+    if COLOR_PRINT is GREEN:
+        print(Fore.GREEN + totalString)
+    elif COLOR_PRINT is RED:
+        print(Fore.RED + totalString)
+    elif COLOR_PRINT is BLUE:
+        print(Fore.BLUE + totalString)
+    elif COLOR_PRINT is YELLOW:
+        print(Fore.YELLOW + totalString)
+    elif COLOR_PRINT is CYAN:
+        print(Fore.CYAN + totalString)
+    elif COLOR_PRINT is MAGENTA:
+        print(Fore.MAGENTA + totalString)
 
 
 # helper function to get average of an RGB tuple
