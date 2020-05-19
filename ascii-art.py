@@ -96,26 +96,31 @@ def main():
         print("ASCII image copied to clipboard.")
 
     if WRITE_TO_FILE:  # write to a file
-        if not os.path.exists(FOLDER_NAME):
-            os.mkdir(FOLDER_NAME)
-
-        os.chdir(FOLDER_NAME)
-
-        if os.path.exists(FILE_NAME):
-            counter = 0
-            while os.path.exists(FILE_NAME):
-                FILE_NAME = f'{name}{counter}.txt'
-                counter += 1
-
-        with open(FILE_NAME, 'w') as f:
-            f.write(totalString)
-            print(f"ASCII image saved to {os.path.abspath(FILE_NAME)}.")
+        write_to_file(FILE_NAME, name, totalString)
 
     if PRINT_TO_SCREEN:  # print to screen
         if not COLOR_PRINT:
             print(totalString)
         else:
             color_print(totalString)
+
+
+# helper function to write to a txt file
+def write_to_file(fileName, imageName, text):
+    if not os.path.exists(FOLDER_NAME):
+        os.mkdir(FOLDER_NAME)
+
+    os.chdir(FOLDER_NAME)
+
+    if os.path.exists(fileName):
+        counter = 0
+        while os.path.exists(fileName):
+            fileName = f'{imageName}{counter}.txt'
+            counter += 1
+
+    with open(fileName, 'w') as f:
+        f.write(text)
+        print(f"ASCII image saved to {os.path.abspath(fileName)}.")
 
 
 # helper function to print in color
