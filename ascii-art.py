@@ -47,11 +47,11 @@ if len(sys.argv) > 1:
         if '-cyan' in additionalFlags:
             COLOR_PRINT = CYAN
 
-    if '-lum' in additionalFlags:
+    if '-lum' in additionalFlags or '-luminosity' in additionalFlags:
         CHOICE = LUMINOSITY
-    if '-avg' in additionalFlags:
+    if '-avg' in additionalFlags or '-average' in additionalFlags:
         CHOICE = AVERAGE
-    if '-light' in additionalFlags:
+    if '-light' in additionalFlags or '-lightness' in additionalFlags:
         CHOICE = LIGHTNESS
 
 
@@ -74,12 +74,7 @@ def main():
     pixels = list(image.getdata())  # get list of RGB values from image
     matrix = [[pixels[width * x + y] for y in range(width)] for x in range(height)]  # get 2D array of RGB values
 
-    if CHOICE == "AVERAGE":  # use average formula to get brightness array
-        brightnessMatrix = [[get_average(matrix[x][y]) for y in range(width)] for x in range(height)]
-    elif CHOICE == "LIGHTNESS":  # use lightness formula to get brightness array
-        brightnessMatrix = [[get_lightness(matrix[x][y]) for y in range(width)] for x in range(height)]
-    else:  # use luminosity formula to get brightness array
-        brightnessMatrix = [[get_luminosity(matrix[x][y]) for y in range(width)] for x in range(height)]
+    brightnessMatrix = get_brightnessMatrix(matrix, width, height)
 
     if INVERTED:  # if inverted, get character from the reversed list
         characterMatrix = [[get_character(brightnessMatrix[x][y], True) for y in range(width)] for x in range(height)]
@@ -162,6 +157,16 @@ def get_character(brightness, inverse):
         return inverseCharacters[index]
     else:
         return characters[index]
+
+
+# helper function to get a brightness matrix
+def get_brightnessMatrix(matrix, width, height):
+    if CHOICE == "AVERAGE":  # use average formula to get brightness array
+        return [[get_average(matrix[x][y]) for y in range(width)] for x in range(height)]
+    elif CHOICE == "LIGHTNESS":  # use lightness formula to get brightness array
+        return [[get_lightness(matrix[x][y]) for y in range(width)] for x in range(height)]
+    else:  # use luminosity formula to get brightness array
+        return [[get_luminosity(matrix[x][y]) for y in range(width)] for x in range(height)]
 
 
 if __name__ == "__main__":
