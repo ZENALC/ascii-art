@@ -5,7 +5,7 @@ import os
 import sys
 
 AVERAGE, LIGHTNESS, LUMINOSITY = 'AVERAGE', 'LIGHTNESS', 'LUMINOSITY'
-RED, GREEN, BLUE, YELLOW = "RED", "GREEN", "BLUE", "YELLOW"
+RED, GREEN, BLUE, YELLOW, MAGENTA, CYAN = "RED", "GREEN", "BLUE", "YELLOW", "MAGENTA", "CYAN"
 MAX_HEIGHT = 150  # maximum height image will be resized to
 MAX_WIDTH = 150  # maximum width image will be resized to
 IMAGE_NAME = 'python.png'  # image name we will convert to ascii
@@ -42,6 +42,10 @@ if len(sys.argv) > 1:
             COLOR_PRINT = YELLOW
         if '-blue' in additionalFlags:
             COLOR_PRINT = BLUE
+        if '-magenta' in additionalFlags:
+            COLOR_PRINT = MAGENTA
+        if '-cyan' in additionalFlags:
+            COLOR_PRINT = CYAN
 
     if '-lum' in additionalFlags:
         CHOICE = LUMINOSITY
@@ -120,6 +124,10 @@ def main():
                 print(Fore.BLUE + totalString)
             elif COLOR_PRINT is YELLOW:
                 print(Fore.YELLOW + totalString)
+            elif COLOR_PRINT is CYAN:
+                print(Fore.CYAN + totalString)
+            elif COLOR_PRINT is MAGENTA:
+                print(Fore.MAGENTA + totalString)
 
 
 # helper function to get average of an RGB tuple
