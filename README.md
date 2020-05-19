@@ -9,3 +9,10 @@ To run, use python ascii-art.py [filename].
 -lum to use the the luminosity algorithm  
 -avg to use the average algorithm  
 -light to use the lightness algorithm
+
+### Example
+<img src ="https://github.com/ZENALC/ascii-art/blob/master/Images/dog.png" width="250px"></img>  
+
+Running ```python ascii-art.py Images/dog.png -i``` would return:
+
+<img src ="https://github.com/ZENALC/ascii-art/blob/master/Images/dogExample.png" width="250px"></img>
