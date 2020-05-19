@@ -11,8 +11,4 @@ To run, use python ascii-art.py [filename].
 -light to use the lightness algorithm
 
 ### Example
-<img src ="https://github.com/ZENALC/ascii-art/blob/master/Images/dog.png" width="250px"></img>  
-
-Running ```python ascii-art.py Images/dog.png -i``` would return:
-
-<img src ="https://github.com/ZENALC/ascii-art/blob/master/Images/dogExample.png" width="250px"></img>
+<img src ="https://raw.githubusercontent.com/ZENALC/ascii-art/master/example.gif" width="100%"></img>  
