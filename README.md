@@ -1,4 +1,4 @@
-**Python program that converts an image file into its equivalent ASCII text file.**
+## Python program that converts an image file into its equivalent ASCII text file.
 
 To run, use python ascii-art.py [filename].
 
