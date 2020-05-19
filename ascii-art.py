@@ -6,7 +6,7 @@ import sys
 AVERAGE, LIGHTNESS, LUMINOSITY = 'AVERAGE', 'LIGHTNESS', 'LUMINOSITY'
 MAX_HEIGHT = 100  # maximum height image will be resized to
 MAX_WIDTH = 200  # maximum width image will be resized to
-IMAGE_NAME = 'giraffe.jpg'  # image name we will convert to ascii
+IMAGE_NAME = 'dog.png'  # image name we will convert to ascii
 IMAGE_PATH = os.path.join('Images', IMAGE_NAME)  # image path that you want to open
 FOLDER_NAME = 'ASCII Files'  # folder we will save images to
 CHOICE = AVERAGE  # AVERAGE, LIGHTNESS, AND LUMINOSITY are possible choices
