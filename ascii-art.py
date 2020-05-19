@@ -3,9 +3,10 @@ from pyperclip import copy
 import os
 import sys
 
-MAX_HEIGHT = 300
-MAX_WIDTH = 500
-IMAGE_NAME = 'zenalc.png'  # image name that you want to open
+MAX_HEIGHT = 100
+MAX_WIDTH = 300
+IMAGE_NAME = 'dog.png'
+IMAGE_PATH = os.path.join('Images', IMAGE_NAME)  # image path that you want to open
 FOLDER_NAME = 'ASCII Files'  # folder we will save images to
 CHOICE = "LUMINOSITY"  # AVERAGE, LIGHTNESS, AND LUMINOSITY are possible choices
 WRITE_TO_FILE = True  # setting to write to file
@@ -18,7 +19,7 @@ inverseCharacters = characters[::-1]  # same array as above but in reverse
 CONSTANT = 3.85  # constant we will use to determine which character to use
 
 if len(sys.argv) > 1:
-    IMAGE_NAME = sys.argv[1]
+    IMAGE_PATH = sys.argv[1]
     additionalFlags = sys.argv[2:]
 
     if '-c' in additionalFlags:
@@ -30,13 +31,18 @@ if len(sys.argv) > 1:
 
 
 def main():
-    name, extension = IMAGE_NAME.split('.')  # get name and extension of image
+    baseFile = os.path.basename(IMAGE_PATH)
+    name, extension = baseFile.split('.')  # get name and extension of image
     if INVERTED:
         name += '-inverted'  # add inverted
     name += f'-{CHOICE.lower()}'  # add choice name to name
     FILE_NAME = f'{name}.txt'  # file name we will save ascii image as
 
-    image = Image.open(IMAGE_NAME)  # open the image
+    image = Image.open(IMAGE_PATH)  # open the image
+    if image.mode == 'P':  # if transparent, convert to RGBA
+        image = image.convert('RGBA')
+    else:
+        image = image.convert('RGB')   # force convert to RGB
     image.thumbnail((MAX_WIDTH, MAX_HEIGHT))  # Resizing image
     width, height = image.size  # get width and height of image
 
@@ -51,11 +57,9 @@ def main():
         brightnessMatrix = [[get_luminosity(matrix[x][y]) for y in range(width)] for x in range(height)]
 
     if INVERTED:
-        characterMatrix = [[get_characterIndex(brightnessMatrix[x][y], True) for y in range(width)] for x in
-                           range(height)]
+        characterMatrix = [[get_characterIndex(brightnessMatrix[x][y], True) for y in range(width)] for x in range(height)]
     else:
-        characterMatrix = [[get_characterIndex(brightnessMatrix[x][y], False) for y in range(width)] for x in
-                           range(height)]
+        characterMatrix = [[get_characterIndex(brightnessMatrix[x][y], False) for y in range(width)] for x in range(height)]
 
     totalString = ''
 
@@ -64,7 +68,7 @@ def main():
 
     if COPY_TO_CLIPBOARD:
         copy(totalString)  # copy ascii-string to clipboard
-        print("ASCII image copied.")
+        print("ASCII image copied to clipboard.")
 
     if WRITE_TO_FILE:
         if not os.path.exists(FOLDER_NAME):
