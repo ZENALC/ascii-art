@@ -1,9 +1,11 @@
 from PIL import Image
+from colorama import Fore, init
 from pyperclip import copy
 import os
 import sys
 
 AVERAGE, LIGHTNESS, LUMINOSITY = 'AVERAGE', 'LIGHTNESS', 'LUMINOSITY'
+RED, GREEN, BLUE, YELLOW = "RED", "GREEN", "BLUE", "YELLOW"
 MAX_HEIGHT = 150  # maximum height image will be resized to
 MAX_WIDTH = 150  # maximum width image will be resized to
 IMAGE_NAME = 'python.png'  # image name we will convert to ascii
@@ -14,6 +16,7 @@ WRITE_TO_FILE = True  # setting to write to file
 COPY_TO_CLIPBOARD = False  # setting to copy to clipboard
 PRINT_TO_SCREEN = False  # setting to print to screen
 INVERTED = False  # setting to invert ascii-txt
+COLOR_PRINT = None
 
 # characters that range from least to most visible
 characters = r"`^\",:;Il!i~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"
@@ -31,6 +34,15 @@ if len(sys.argv) > 1:
         INVERTED = True
     if '-p' in additionalFlags:
         PRINT_TO_SCREEN = True
+        if '-green' in additionalFlags:
+            COLOR_PRINT = GREEN
+        if '-red' in additionalFlags:
+            COLOR_PRINT = RED
+        if '-yellow' in additionalFlags:
+            COLOR_PRINT = YELLOW
+        if '-blue' in additionalFlags:
+            COLOR_PRINT = BLUE
+
     if '-lum' in additionalFlags:
         CHOICE = LUMINOSITY
     if '-avg' in additionalFlags:
@@ -96,7 +108,18 @@ def main():
             print(f"ASCII image saved to {os.path.abspath(FILE_NAME)}.")
 
     if PRINT_TO_SCREEN:  # print to screen
-        print(totalString)
+        if not COLOR_PRINT:
+            print(totalString)
+        else:
+            init(convert=True)  # initialize colorama
+            if COLOR_PRINT is GREEN:
+                print(Fore.GREEN + totalString)
+            elif COLOR_PRINT is RED:
+                print(Fore.RED + totalString)
+            elif COLOR_PRINT is BLUE:
+                print(Fore.BLUE + totalString)
+            elif COLOR_PRINT is YELLOW:
+                print(Fore.YELLOW + totalString)
 
 
 # helper function to get average of an RGB tuple
