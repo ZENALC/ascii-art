@@ -4,13 +4,12 @@ from pyperclip import copy
 import os
 import sys
 
-AVERAGE, LIGHTNESS, LUMINOSITY = 'AVERAGE', 'LIGHTNESS', 'LUMINOSITY'
 MAX_HEIGHT = 50  # maximum height image will be resized to
 MAX_WIDTH = 50  # maximum width image will be resized to
 IMAGE_NAME = 'python.png'  # image name we will convert to ascii
 IMAGE_PATH = os.path.join('../Images', IMAGE_NAME)  # image path that you want to open
 FOLDER_NAME = 'ASCII Files'  # folder we will save images to
-CHOICE = AVERAGE  # AVERAGE, LIGHTNESS, AND LUMINOSITY are possible choices
+CHOICE = 'AVERAGE'  # AVERAGE, LIGHTNESS, AND LUMINOSITY are possible choices
 WRITE_TO_FILE = True  # setting to write to file
 COPY_TO_CLIPBOARD = False  # setting to copy to clipboard
 PRINT_TO_SCREEN = False  # setting to print to screen
