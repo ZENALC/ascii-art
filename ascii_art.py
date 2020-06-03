@@ -46,7 +46,7 @@ class ASCIIArt:
         elif self.choice == 'LUMINOSITY':  # Use luminosity formula to get brightness array
             return [[self.get_luminosity(self.matrix[x][y]) for y in range(self.width)] for x in range(self.height)]
         else:
-            raise Exception("Invalid choice given.")
+            raise ValueError("Invalid algorithm choice. Possible values are average, lightness, and luminosity.")
 
     def get_character_matrix(self):
         """Helper function to get character matrix depending on brightness and inverse values"""
