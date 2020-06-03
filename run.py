@@ -4,16 +4,16 @@ import argparse
 
 def main():
     parser = argparse.ArgumentParser(description='Convert an image to ASCII')
-    parser.add_argument('imagePath', type=str, help='path to image file that will be converted.')
+    parser.add_argument('imagePath', type=str, help='path to image file that will be converted')
     parser.add_argument('-i', '--inverted', help='invert the generated ASCII',
                         action="store_true")
     parser.add_argument('-c', '--copy', help='copy the generated ASCII to clipboard',
                         action="store_true")
-    parser.add_argument('--choice', help='pick what type of algorithm to use - luminosity, brightness, average',
+    parser.add_argument('--choice', help='pick what type of algorithm to use',
                         nargs=1, default="average", choices=('luminosity', 'brightness', 'average'))
-    parser.add_argument('-p', '--print', help='print the generated ASCII with specified color',
-                        nargs='?', const=1)
-    parser.add_argument('-w', '--write', help='write the generated ASCII to specified file',
+    parser.add_argument('-p', '--print', help='print the generated ASCII with specified color if provided',
+                        nargs='?', const=1, choices=('red', 'blue', 'yellow', 'green', 'cyan', 'magenta'))
+    parser.add_argument('-w', '--write', help='write the generated ASCII to specified file if provided or default file',
                         nargs='?', const=1)
     args = parser.parse_args()
 
