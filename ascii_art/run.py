@@ -1,4 +1,4 @@
-from ascii_art import ASCIIArt
+from ascii_art.ascii_art import ASCIIArt
 import argparse
 
 
