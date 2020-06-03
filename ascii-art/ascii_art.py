@@ -99,10 +99,12 @@ class ASCIIArt:
         outputName, _ = os.path.splitext(fileName)
         outputFile = outputName + '.txt'
         folderName = 'ASCII Files'
-        if not os.path.exists(folderName):
-            os.mkdir(folderName)
 
         previousPath = os.getcwd()
+        os.chdir('../')
+
+        if not os.path.exists(folderName):
+            os.mkdir(folderName)
         os.chdir(folderName)
 
         if os.path.exists(outputFile):
@@ -113,8 +115,8 @@ class ASCIIArt:
 
         with open(outputFile, 'w') as f:
             f.write(self.renderedText)
-            print(f"ASCII image saved to {os.path.abspath(outputFile)}.")
 
+        print(f"ASCII image saved to {os.path.abspath(outputFile)}.")
         os.chdir(previousPath)
 
     def __repr__(self):
