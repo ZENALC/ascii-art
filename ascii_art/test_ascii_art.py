@@ -42,7 +42,7 @@ def test_get_luminosity(asciiObject):
 
 
 def test_renderText(asciiObject):
-    os.chdir(os.path.join('ascii_art', 'Text Files'))
+    os.chdir(os.path.join('ascii_art', 'Test Files'))
     with open('python.txt', 'r') as f:
         assert asciiObject.renderText() == f.read()
 
