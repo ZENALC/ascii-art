@@ -49,4 +49,3 @@ def test_renderText(asciiObject):
     with open('pythonInverted.txt', 'r') as f:
         asciiObject.inverted = True
         assert asciiObject.renderText() == f.read()
-
