@@ -50,4 +50,3 @@ def test_renderText(asciiObject):
         asciiObject.inverted = True
         assert asciiObject.renderText() == f.read()
 
-
