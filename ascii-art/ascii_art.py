@@ -23,7 +23,7 @@ class ASCIIArt:
     def get_image_matrix(self):
         """Helper function to get 2D array of RGB values"""
         imagePixels = self.get_image_pixels()
-        return [[imagePixels[self.width * x + y] for y in range(self.width)] for x in range(self.height)]
+        return [imagePixels[y:y + self.width] for y in range(0, len(imagePixels), self.width)]
 
     def get_image_pixels(self):
         """Helper function to get RGB tuples from an Image object"""
