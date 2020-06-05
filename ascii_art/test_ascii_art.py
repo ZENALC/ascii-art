@@ -5,7 +5,7 @@ import os
 @pytest.fixture
 def asciiObject():
     from ascii_art import ASCIIArt as Art
-    return Art('Images/python.png')
+    return Art('../Images/python.png')
 
 
 def test_matrix(asciiObject):
@@ -42,7 +42,7 @@ def test_get_luminosity(asciiObject):
 
 
 def test_renderText(asciiObject):
-    os.chdir(os.path.join('ascii_art', 'Test Files'))
+    os.chdir('Test Files')
     with open('python.txt', 'r') as f:
         assert asciiObject.renderText() == f.read()
 
