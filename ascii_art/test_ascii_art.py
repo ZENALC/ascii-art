@@ -5,7 +5,7 @@ import os
 @pytest.fixture
 def asciiObject():
     from ascii_art import ASCIIArt as Art
-    return Art('../Images/python.png')
+    return Art('python.png')
 
 
 def test_matrix(asciiObject):
