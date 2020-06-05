@@ -61,7 +61,9 @@ class ASCIIArt:
         characterMatrix = self.get_character_matrix()
         renderedText = ''
         for row in characterMatrix:
-            renderedText += "".join(row) + '\n'
+            for element in row:
+                renderedText += element * 2
+            renderedText += '\n'
 
         return renderedText
 
