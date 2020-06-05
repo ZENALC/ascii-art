@@ -23,7 +23,7 @@ class ASCIIArt:
     def get_image_matrix(self):
         """Helper function to get 2D array of RGB values"""
         imagePixels = self.get_image_pixels()
-        return [[imagePixels[self.width * x + y] for y in range(self.width)] for x in range(self.height)]
+        return [imagePixels[y:y + self.width] for y in range(0, len(imagePixels), self.width)]
 
     def get_image_pixels(self):
         """Helper function to get RGB tuples from an Image object"""
@@ -37,24 +37,26 @@ class ASCIIArt:
         else:
             return self.characters[index]
 
-    def get_brightness_matrix(self):
-        """Helper function to return brightness matrix of image"""
+    def get_character_matrix(self):
+        """Helper function to get character matrix depending on algorithm choice and inverted values"""
+
+        def getAverage(x, y):
+            return self.get_character(self.get_average(self.matrix[y][x]))
+
+        def getLightness(x, y):
+            return self.get_character(self.get_lightness(self.matrix[y][x]))
+
+        def getLuminosity(x, y):
+            return self.get_character(self.get_luminosity(self.matrix[y][x]))
+
         if self.choice == 'AVERAGE':  # Use average formula to get brightness array
-            return [[self.get_average(self.matrix[x][y]) for y in range(self.width)] for x in range(self.height)]
+            return [[getAverage(x, y) for x in range(self.width)] for y in range(self.height)]
         elif self.choice == 'LIGHTNESS':  # Use lightness formula to get brightness array
-            return [[self.get_lightness(self.matrix[x][y]) for y in range(self.width)] for x in range(self.height)]
+            return [[getLightness(x, y) for x in range(self.width)] for y in range(self.height)]
         elif self.choice == 'LUMINOSITY':  # Use luminosity formula to get brightness array
-            return [[self.get_luminosity(self.matrix[x][y]) for y in range(self.width)] for x in range(self.height)]
+            return [[getLuminosity(x, y) for x in range(self.width)] for y in range(self.height)]
         else:
             raise ValueError("Invalid algorithm choice. Possible values are average, lightness, and luminosity.")
-
-    def get_character_matrix(self):
-        """Helper function to get character matrix depending on brightness and inverse values"""
-        brightnessMatrix = self.get_brightness_matrix()
-        if self.inverted:  # if inverted, get character from the reversed list
-            return [[self.get_character(brightnessMatrix[x][y]) for y in range(self.width)] for x in range(self.height)]
-        else:  # if not inverted, get character from the original list
-            return [[self.get_character(brightnessMatrix[x][y]) for y in range(self.width)] for x in range(self.height)]
 
     def renderText(self):
         """Main function to return ASCII format of image"""
